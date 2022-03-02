@@ -4,11 +4,11 @@ from utilites import time_track
 
 @time_track
 def start_collecting():
-    oz = Platform('oz')
+    # oz = Platform('oz')
     wb = Platform('wb')
-    oz.start()
+    # oz.start()
     wb.start()
-    oz.join()
+    # oz.join()
     wb.join()
 
 

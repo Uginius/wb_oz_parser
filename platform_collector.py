@@ -28,7 +28,7 @@ class Platform(Thread):
                                'Ссылка на товар (url)',
                                ]
         self.write_data = self.product_titles
-        self.result_file = f'results/{self.platform}_{datetime.datetime.now().strftime("%d-%m-%Y_%H-%M")}.csv'
+        self.result_file = f'results/{self.platform}_{datetime.datetime.now().strftime("%d-%m-%Y_%H-%M")}'
 
     def run(self):
         self.get_id_from_file()
@@ -59,7 +59,7 @@ class Platform(Thread):
                     product.order = self.platform_order
                     self.goods.append(product)
                 except Exception as ex:
-                    print(ex)
+                    print(self.platform, ex)
 
     def data_out(self):
         for product in self.goods:
@@ -73,7 +73,8 @@ class Platform(Thread):
             current_parser.run()
             self.data_from_page = current_parser.data_to_out()
             self.collect_data_to_write()
-            self.write_data_to_csv()
+            # self.write_data_to_csv()
+            self.write_data_to_text()
         if browser:
             browser.close()
 
@@ -92,6 +93,13 @@ class Platform(Thread):
         self.write_data = [collect_line[key] for key in self.product_titles]
 
     def write_data_to_csv(self):
-        with open(self.result_file, "a", newline='') as csv_file:
+        filename = self.result_file + '.csv'
+        with open(filename, "a", newline='') as csv_file:
             writer = csv.writer(csv_file, delimiter=';')
             writer.writerow(self.write_data)
+
+    def write_data_to_text(self):
+        to_write = [str(el) for el in self.write_data]
+        filename = self.result_file + '.txt'
+        with open(filename, "a", newline='') as write_file:
+            write_file.write(''.join(to_write))

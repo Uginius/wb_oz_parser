@@ -17,7 +17,8 @@ class Parser:
             self.get_page_from_url()
             self.parse_page()
         except Exception as ex:
-            print('ERROR', ex)
+            print(f'{self.product.id}: parser run error -', ex)
+            self.errors_log()
 
     def get_page_from_url(self):
         self.browser.get(url=self.product.url)
@@ -47,3 +48,7 @@ class Parser:
             filename = f'htmls/{self.product.shop_name}_{self.product.id}.html'
         with open(filename, "r", encoding='utf8') as read_file:
             self.page_data = BeautifulSoup(read_file.read(), 'lxml')
+
+    def errors_log(self):
+        with open(f'results/errors.txt', "a") as write_file:
+            write_file.write(str(self.product.id))

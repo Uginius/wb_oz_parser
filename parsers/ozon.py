@@ -38,11 +38,9 @@ class ParserOz(Parser):
         #     except Exception as e:
         #         print(e)
         #         continue  # Не нашли элемент, попробуем на следующей итерации
-        self.browser.execute_script("window.scrollBy(0, 1000)")
-        time.sleep(1)
-        self.browser.execute_script("window.scrollBy(0, 1000)")
-        time.sleep(1)
-        self.browser.execute_script("window.scrollBy(0,-1000)")
+        for _ in range(3):
+            time.sleep(3)
+            self.browser.execute_script("window.scrollBy(0, 1000)")
 
     def parse_page(self):
         self.product.name = ' '.join(self.page_data.find('h1').text.strip().split())

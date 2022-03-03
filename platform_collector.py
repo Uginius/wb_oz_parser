@@ -103,4 +103,4 @@ class Platform(Thread):
         to_write = [str(el) for el in self.write_data]
         filename = self.result_file + '.txt'
         with open(filename, "a", newline='') as write_file:
-            write_file.write(''.join(to_write) + '\n')
+            write_file.write(';'.join(to_write) + '\n')

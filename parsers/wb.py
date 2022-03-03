@@ -31,4 +31,4 @@ class ParserWb(Parser):
                 votes = int(round((int(value[:-1]) * int(self.product.quantity)) / 100, 0))
                 self.product.votes[key] = votes
         except Exception as ex:
-            print(ex)
+            print(f'{self.product.id}: rating error - {ex}')

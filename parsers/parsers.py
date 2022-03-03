@@ -17,7 +17,7 @@ class Parser:
             self.get_page_from_url()
             self.parse_page()
         except Exception as ex:
-            print(f'{self.product.id}: parser run error -', ex)
+            print(f'{self.product.id}: parser run error - {ex}')
             self.errors_log()
 
     def get_page_from_url(self):

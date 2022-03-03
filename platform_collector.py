@@ -66,15 +66,16 @@ class Platform(Thread):
             print(f'platform: {self.platform} -- №{product.order} -- id: {product.id} -- url: {product.url}')
 
     def start_parsing(self):
-        self.write_data_to_csv()
+        # write_data = self.write_data_to_csv
+        write_data = self.write_data_to_text
+        write_data()
         browser = webdriver.Chrome(service=Service(executable_path=browser_path))
         for product in self.goods:
             current_parser = self.parser(product, browser)
             current_parser.run()
             self.data_from_page = current_parser.data_to_out()
             self.collect_data_to_write()
-            # self.write_data_to_csv()
-            self.write_data_to_text()
+            write_data()
         if browser:
             browser.close()
 
@@ -102,4 +103,4 @@ class Platform(Thread):
         to_write = [str(el) for el in self.write_data]
         filename = self.result_file + '.txt'
         with open(filename, "a", newline='') as write_file:
-            write_file.write(''.join(to_write))
+            write_file.write(''.join(to_write) + '\n')

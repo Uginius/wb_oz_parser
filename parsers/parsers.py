@@ -50,5 +50,5 @@ class Parser:
             self.page_data = BeautifulSoup(read_file.read(), 'lxml')
 
     def errors_log(self):
-        with open(f'results/{self.product.shop_name}errors.txt', "a") as write_file:
+        with open(f'results/{self.product.shop_name}_errors.txt', "a") as write_file:
             write_file.write(str(self.product.id) + '\n')

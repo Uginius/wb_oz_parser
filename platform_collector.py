@@ -66,8 +66,8 @@ class Platform(Thread):
             print(f'platform: {self.platform} -- №{product.order} -- id: {product.id} -- url: {product.url}')
 
     def start_parsing(self):
-        # write_data = self.write_data_to_csv
-        write_data = self.write_data_to_text
+        write_data = self.write_data_to_csv
+        # write_data = self.write_data_to_text
         write_data()
         browser = webdriver.Chrome(service=Service(executable_path=browser_path))
         for product in self.goods:
